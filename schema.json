@@ -1,0 +1,517 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "WordPress REST API",
+    "description": "REST API for WordPress, covering posts, pages, media, themes, plugins, and settings.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://URL TO YOUR WORDPRESS SITE/wp-json",
+      "description": "WordPress API server"
+    }
+  ],
+  "paths": {
+    "/wp/v2/posts": {
+      "get": {
+        "summary": "Retrieves a list of posts",
+        "operationId": "getPosts",
+        "responses": {
+          "200": {
+            "description": "A list of posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new post",
+        "operationId": "createPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A new post created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp/v2/posts/{id}": {
+      "get": {
+        "summary": "Retrieves a specific post by ID",
+        "operationId": "getPostById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a specific post",
+        "operationId": "deletePost",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post deleted"
+          }
+        }
+      }
+    },
+    "/wp/v2/pages": {
+      "get": {
+        "summary": "Retrieves a list of pages",
+        "operationId": "getPages",
+        "responses": {
+          "200": {
+            "description": "A list of pages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new page",
+        "operationId": "createPage",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Page"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A new page created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp/v2/pages/{id}": {
+      "get": {
+        "summary": "Retrieves a specific page by ID",
+        "operationId": "getPageById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A specific page",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a specific page",
+        "operationId": "deletePage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page deleted"
+          }
+        }
+      }
+    },
+    "/wp/v2/themes": {
+      "get": {
+        "summary": "Retrieves a list of themes",
+        "operationId": "getThemes",
+        "responses": {
+          "200": {
+            "description": "A list of themes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Theme"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp/v2/plugins": {
+      "get": {
+        "summary": "Retrieves a list of plugins",
+        "operationId": "getPlugins",
+        "responses": {
+          "200": {
+            "description": "A list of plugins",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plugin"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/wp/v2/settings": {
+      "get": {
+        "summary": "Retrieves site settings",
+        "operationId": "getSettings",
+        "responses": {
+          "200": {
+            "description": "Site settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Settings"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the post",
+            "readOnly": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the post was published",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the post"
+          },
+          "content": {
+            "type": "string",
+            "description": "The content of the post"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the post"
+          },
+          "author": {
+            "type": "integer",
+            "description": "The ID of the user who authored the post"
+          },
+          "excerpt": {
+            "type": "string",
+            "description": "The excerpt of the post"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ]
+      },
+      "Page": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the page",
+            "readOnly": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the page was published",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the page"
+          },
+          "content": {
+            "type": "string",
+            "description": "The content of the page"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the page"
+          },
+          "author": {
+            "type": "integer",
+            "description": "The ID of the user who authored the page"
+          },
+          "excerpt": {
+            "type": "string",
+            "description": "The excerpt of the page"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ]
+      },
+      "Media": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the media item",
+            "readOnly": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the media was uploaded",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the media item"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the media item"
+          },
+          "author": {
+            "type": "integer",
+            "description": "The ID of the user who uploaded the media item"
+          },
+          "mime_type": {
+            "type": "string",
+            "description": "The MIME type of the media item"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the media item"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "Theme": {
+        "type": "object",
+        "properties": {
+          "theme_slug": {
+            "type": "string",
+            "description": "The slug of the theme"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the theme"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the theme"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the theme"
+          },
+          "author": {
+            "type": "string",
+            "description": "The author of the theme"
+          },
+          "screenshot_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the theme's screenshot"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the theme (active or inactive)"
+          }
+        },
+        "required": [
+          "theme_slug",
+          "name"
+        ]
+      },
+      "Plugin": {
+        "type": "object",
+        "properties": {
+          "plugin_slug": {
+            "type": "string",
+            "description": "The slug of the plugin"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the plugin"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the plugin"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the plugin"
+          },
+          "author": {
+            "type": "string",
+            "description": "The author of the plugin"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive"
+            ],
+            "description": "The status of the plugin (active or inactive)"
+          }
+        },
+        "required": [
+          "plugin_slug",
+          "name"
+        ]
+      },
+      "Settings": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the site"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the site"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the site"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The administrative email address"
+          },
+          "timezone": {
+            "type": "string",
+            "description": "The timezone of the site"
+          },
+          "date_format": {
+            "type": "string",
+            "description": "The date format used on the site"
+          },
+          "time_format": {
+            "type": "string",
+            "description": "The time format used on the site"
+          },
+          "start_of_week": {
+            "type": "integer",
+            "description": "The first day of the week"
+          },
+          "language": {
+            "type": "string",
+            "description": "The default language of the site"
+          },
+          "use_smilies": {
+            "type": "boolean",
+            "description": "Whether to convert emoticons to graphics"
+          },
+          "posts_per_page": {
+            "type": "integer",
+            "description": "Number of posts to show on a page."
+          }
+        },
+        "required": [
+          "title",
+          "url"
+        ]
+      }
+    }
+  }
+}
