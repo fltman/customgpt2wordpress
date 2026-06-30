@@ -1,4 +1,7 @@
 # customgpt2wordpress
+
+[![Support me on Patreon](https://img.shields.io/badge/Patreon-Support%20my%20work-FF424D?style=flat&logo=patreon&logoColor=white)](https://www.patreon.com/AndersBjarby)
+
 how to integrate a cutom GPT with the REST API on a Wordpress site
 <img width="669" alt="image" src="https://github.com/fltman/customgpt2wordpress/assets/102783063/8209e5ef-d095-4ce8-b546-6f8e3d5cb7a3">
 I used those instructions:
